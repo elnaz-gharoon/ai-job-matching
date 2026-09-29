@@ -1,0 +1,7 @@
+POST http://localhost:8080/api/job-matches
+Content-Type: application/json
+
+{
+  "cvText": "Java, Spring Boot, PostgreSQL, JPA",
+  "jobDescription": "Gesucht wird ein Java Backend Developer mit Spring Boot Kenntnissen."
+}
