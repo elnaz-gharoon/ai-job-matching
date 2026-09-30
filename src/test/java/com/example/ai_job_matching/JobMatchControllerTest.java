@@ -36,6 +36,6 @@ public class JobMatchControllerTest {
                 .thenReturn(savedJobMatch);
         JobMatchResponse response = jobMatchController.createJobMatch(request);
         assertEquals(85.0, response.getMatchScore());
-        assertEquals("gut geeigned", response.getRecommendation());
+        assertEquals("Gut geeignet", response.getRecommendation());
 
 }}
