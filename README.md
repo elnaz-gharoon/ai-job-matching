@@ -190,18 +190,18 @@ The project uses:
 
 * [x] Spring Boot project setup
 * [x] PostgreSQL configuration
-* [ ] JobMatch entity
-* [ ] Repository
-* [ ] DTOs
-* [ ] Service layer
-* [ ] REST Controller
-* [ ] Validation and exception handling
+* [x] JobMatch entity
+* [x] Repository
+* [x] DTOs
+* [x] Service layer
+* [x] REST Controller
+* [x] Validation and exception handling
 * [ ] Skill extraction
-* [ ] AI embedding integration
+* [x] AI embedding integration
 * [ ] Semantic similarity calculation
 * [ ] Automated tests
 * [ ] Swagger / OpenAPI
-* [ ] Docker Compose
+* [x] Docker Compose
 * [ ] GitHub documentation
 * [ ] Optional OpenSearch integration
 
