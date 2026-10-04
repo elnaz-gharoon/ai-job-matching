@@ -6,12 +6,18 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class JobMatchService {
+
     private final JobMatchRepository jobMatchRepository;
-    public JobMatchService(JobMatchRepository jobMatchRepository){
+    private final EmbeddingService embeddingService ;
+
+    public JobMatchService(JobMatchRepository jobMatchRepository, EmbeddingService embeddingService){
         this.jobMatchRepository= jobMatchRepository;
+        this.embeddingService = embeddingService;
     }
     public JobMatch save(JobMatch jobMatch){
-        return jobMatchRepository.save(jobMatch);
+    double[] cvEmbedding = embeddingService.createEmbedding(jobMatch.getCvText());
+    double[] jobEmbedding= embeddingService.createEmbedding(jobMatch.getJobDescription());
+    return jobMatch;
     }
 
 }
