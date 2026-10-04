@@ -37,6 +37,16 @@ The AI component is designed to use local embedding models instead of paid exter
 Planned technology:
 
 * Ollama
+  OllamaEmbeddingService
+        ↓
+HTTP POST
+        ↓
+http://localhost:11434/api/embed
+        ↓
+nomic-embed-text
+        ↓
+Embedding-Vektor
+
 * Sentence Transformers / embedding models
 * Semantic similarity using vector embeddings
 
