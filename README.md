@@ -37,6 +37,7 @@ The AI component is designed to use local embedding models instead of paid exter
 Planned technology:
 
 * Ollama
+  
   OllamaEmbeddingService
         ↓
 HTTP POST
