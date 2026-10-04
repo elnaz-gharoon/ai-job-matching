@@ -37,16 +37,48 @@ The AI component is designed to use local embedding models instead of paid exter
 Planned technology:
 
 * Ollama
-  
-  OllamaEmbeddingService
+## AI Embedding
+
+The application uses Ollama with the `nomic-embed-text` model to convert text into numerical embedding vectors.
+
+### Embedding Flow
+
+```text
+CV / Job Description
         ↓
-HTTP POST
+OllamaEmbeddingService
         ↓
-http://localhost:11434/api/embed
+HTTP Request to Ollama
         ↓
 nomic-embed-text
         ↓
-Embedding-Vektor
+Embedding Vector
+        ↓
+Java Application
+        ↓
+Similarity Calculation
+        ↓
+Match Score
+```
+
+For example:
+
+```text
+Input:
+"Java Spring Boot Entwickler"
+
+        ↓
+
+nomic-embed-text
+
+        ↓
+
+Embedding Vector:
+[-0.0039, -0.0485, -0.1673, ...]
+```
+
+The embedding vector represents the semantic meaning of the input text. The application can later compare the embedding of a CV with the embedding of a job description to calculate a semantic similarity score.
+
 
 * Sentence Transformers / embedding models
 * Semantic similarity using vector embeddings
