@@ -23,12 +23,14 @@ The project combines a traditional Spring Boot backend with AI-based semantic ma
 * Spring Boot
 * Spring Data JPA / Hibernate
 * PostgreSQL
+* Frontend: Angular, TypeScript, HTML / CSS
 * Maven
 * REST API
 * JUnit 5
 * Mockito
 * Docker
 * Git
+
 
 ### AI
 
@@ -204,6 +206,15 @@ The application runs on:
 http://localhost:8080
 ```
 
+The frontend can be started locally with:
+
+cd frontend
+ng serve
+
+The application is available at:
+
+http://localhost:4200
+
 ## 🧪 Tests
 
 Run all tests:
@@ -236,6 +247,7 @@ The project uses:
 * [x] Docker Compose
 * [ ] GitHub documentation
 * [ ] Optional OpenSearch integration
+* [ ] Frontend
 
 ## 🎯 Project Goal
 
