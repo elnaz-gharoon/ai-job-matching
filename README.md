@@ -267,4 +267,4 @@ This project is designed as a portfolio project demonstrating practical backend 
 
 **Elnaz Gharoon**
 
-Java Backend Developer
+Software Developer
