@@ -12,6 +12,7 @@ public class GlobalExceptionHandler {
 @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 
     public String handleException(Exception exception){
-        return "Ein unerwartet Fehler!";
+        exception.printStackTrace();
+    return "Ein unerwartet Fehler!";
     }
 }

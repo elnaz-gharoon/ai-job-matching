@@ -26,6 +26,10 @@ private final RestClient restClient;
                 .body(request)
                 .retrieve()
                 .body(OllamaEmbeddingResponse.class);
+        System.out.println("Ollama response" + response);
+        if (response == null || response.getEmbeddings() == null || response.getEmbeddings().length == 0){
+            throw new IllegalStateException("Ollama hat keine Embeddings zurückgegeben.");
+        }
 
         return response.getEmbeddings()[0];
     }
