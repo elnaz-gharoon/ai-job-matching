@@ -9,7 +9,15 @@ public class OllamaEmbeddingResponse {
         return embeddings;
     }
 
-    public void setEmbedding(double[][] embedding) {
-        this.embeddings = embedding;
+    public void setEmbedding(double[][] embeddings) {
+        this.embeddings = embeddings;
+    }
+    @Override
+    public String toString() {
+        return "OllamaEmbeddingResponse{" +
+                "embeddings=" + (embeddings == null
+                ? "null"
+                : "Anzahl: " + embeddings.length) +
+                '}';
     }
 }

@@ -4,16 +4,14 @@ import com.example.ai_job_matching.dto.JobMatchRequest;
 import com.example.ai_job_matching.dto.JobMatchResponse;
 import com.example.ai_job_matching.entity.JobMatch;
 import com.example.ai_job_matching.service.JobMatchService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/job-matches")
-
+@CrossOrigin(origins = "http://localhost:4200")
 public class JobMatchController {
     private final JobMatchService jobMatchService;
+
 
     public JobMatchController(JobMatchService jobMatchService) {
         this.jobMatchService = jobMatchService;
