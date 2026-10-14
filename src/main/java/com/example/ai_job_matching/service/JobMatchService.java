@@ -15,6 +15,8 @@ public class JobMatchService {
         this.embeddingService = embeddingService;
     }
     public JobMatch save(JobMatch jobMatch){
+        System.out.println("CV Text: " + jobMatch.getCvText());
+        System.out.println("Job Desc" + jobMatch.getJobDescription());
     double[] cvEmbedding = embeddingService.createEmbedding(jobMatch.getCvText());
     double[] jobEmbedding= embeddingService.createEmbedding(jobMatch.getJobDescription());
         System.out.println("CV embedding length: " + cvEmbedding.length);
