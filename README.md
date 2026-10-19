@@ -245,6 +245,7 @@ The project uses:
 * [x] AI embedding integration
 * [x] Ollama embedding integration
 * [x] OpenSearch configuration and job embedding indexing
+* [ ] OpenSearch k-NN semantic search
 * [ ] Automated tests
 * [ ] Swagger / OpenAPI
 * [x] Docker Compose
