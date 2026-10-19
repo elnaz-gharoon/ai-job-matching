@@ -243,7 +243,8 @@ The project uses:
 * [x] Validation and exception handling
 * [ ] Skill extraction
 * [x] AI embedding integration
-* [ ] Semantic similarity calculation
+* [x] Ollama embedding integration
+* [x] OpenSearch configuration and job embedding indexing
 * [ ] Automated tests
 * [ ] Swagger / OpenAPI
 * [x] Docker Compose
