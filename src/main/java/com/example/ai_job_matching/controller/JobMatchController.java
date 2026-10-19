@@ -6,6 +6,8 @@ import com.example.ai_job_matching.entity.JobMatch;
 import com.example.ai_job_matching.service.JobMatchService;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+
 @RestController
 @RequestMapping("/api/job-matches")
 @CrossOrigin(origins = "http://localhost:4200")
@@ -18,17 +20,20 @@ public class JobMatchController {
     }
 
     @PostMapping
-    public JobMatchResponse createJobMatch(@RequestBody JobMatchRequest request){
+    public JobMatchResponse createJobMatch(@RequestBody JobMatchRequest request) throws IOException {
         JobMatch jobMatch = new JobMatch();
 
         jobMatch.setCvText(request.getCvText());
         jobMatch.setJobDescription(request.getJobDescription());
+        jobMatch.setJobTitle(request.getJobTitle());
        JobMatch saveJobMatched = jobMatchService.save(jobMatch);
+        String jobTitle = jobMatch.getJobTitle();
 
        JobMatchResponse response = new JobMatchResponse();
        response.setId(saveJobMatched.getId());
        response.setMatchScore(saveJobMatched.getMatchScore());
        response.setRecommendation(saveJobMatched.getRecommendation());
+
        return response;
 
     }
