@@ -23,6 +23,8 @@ The project combines a traditional Spring Boot backend with AI-based semantic ma
 * Spring Boot
 * Spring Data JPA / Hibernate
 * PostgreSQL
+* OpenSearch
+* Ollama with nomic-embed-text
 * Frontend: Angular, TypeScript, HTML / CSS
 * Maven
 * REST API
@@ -58,9 +60,9 @@ Embedding Vector
         ↓
 Java Application
         ↓
-Similarity Calculation
+OpenSearch
         ↓
-Match Score
+Semantic Vector Search (k-NN)
 ```
 
 For example:
