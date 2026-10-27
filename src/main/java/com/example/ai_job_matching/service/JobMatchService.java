@@ -56,11 +56,12 @@ List<Float> embeddings = Arrays.stream(cvEmbedding).mapToObj(value -> (float)val
 
 
       return response.hits().hits().stream()
-              .map(hit -> hit.source())
-              .filter(java.util.Objects::nonNull).filter(job -> job.getJobTitle() != null)
-              .map(job -> new JobSearchResponse(
-                      job.getJobTitle(),
-                      job.getJobDescription()
+              .filter(hit -> hit.source() != null)
+              .filter(hit -> hit.source().getJobTitle() != null)
+              .map(hit -> new JobSearchResponse(
+                      hit.source().getJobTitle(),
+                      hit.source().getJobDescription(),
+                      hit.score()
               ))
               .toList();
   }
