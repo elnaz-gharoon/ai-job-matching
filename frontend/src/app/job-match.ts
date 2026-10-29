@@ -17,4 +17,13 @@ export class JobMatch {
       };
     return this.http.post(this.apiUrl, request);
     }
+
+  searchSimilarJobs(cvText: string) {
+    return this.http.get<any[]>(
+      `${this.apiUrl}/search`,
+      {
+        params: { cvText: cvText }
+      }
+    );
+  }
 }
