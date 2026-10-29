@@ -62,7 +62,7 @@ mvn test
 - [x] Ollama embedding integration
 - [x] OpenSearch embedding indexing
 - [x] k-NN semantic search
-- [ ] CV-to-job similarity score
+- [x] CV-to-job similarity score
 - [ ] Matching and missing skills analysis
 - [ ] Complete frontend integration
 
