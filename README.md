@@ -102,6 +102,7 @@ mvn test
 - [x] Ollama embedding integration
 - [x] OpenSearch embedding indexing
 - [x] Direct CV-to-job similarity scoring
+- [x] Frontend with Angular
 - [ ] Complete end-to-end matching workflow
 - [ ] Matching and missing skills analysis
 - [ ] Expanded automated test coverage
