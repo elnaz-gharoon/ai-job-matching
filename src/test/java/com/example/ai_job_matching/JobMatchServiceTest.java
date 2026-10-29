@@ -8,7 +8,12 @@ import com.example.ai_job_matching.service.JobMatchService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
-import org.mockito.Captor;
+import com.example.ai_job_matching.dto.JobSearchResponse;
+import org.opensearch.client.opensearch.core.SearchResponse;
+import org.opensearch.client.opensearch.core.search.Hit;
+import com.example.ai_job_matching.document.JobDocument;
+import org.opensearch.client.opensearch.core.search.HitsMetadata;
+import java.util.List;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -19,8 +24,7 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -53,6 +57,66 @@ public class JobMatchServiceTest {
     IndexRequest capturedRequest = index.getValue();
     assertEquals( "job-embeddings", capturedRequest.index());
 
+    }
+
+    @Test
+    void searchSimilarJobs_shouldReturnJobWithSimilarityScore() throws IOException {
+        String cvText = "Java Entwicklerin mit Erfahrung in Spring Boot";
+        double [] embedding = {0.1, 0.2, 0.3};
+        when(embeddingService.createEmbedding(cvText)).thenReturn(embedding);
+        List<Float> jobEmbedding = List.of(0.1f, 0.2f, 0.3f);
+        JobDocument jobDocument = new JobDocument(
+                "Junior Java Backend Developer",
+                "Java, Spring Boot, REST APIs und PostgreSQL",
+                jobEmbedding
+        );
+        Hit<JobDocument> hit = Hit.of(h -> h
+                .index("job-embeddings")
+                .id("1")
+                .score(0.95)
+                .source(jobDocument)
+        );
+
+        // Arrange: OpenSearch-Antwort simulieren
+        @SuppressWarnings("unchecked")
+        SearchResponse<JobDocument> searchResponse =
+                mock(SearchResponse.class);
+
+        @SuppressWarnings("unchecked")
+        HitsMetadata<JobDocument> hitsMetadata =
+                mock(HitsMetadata.class);
+
+        when(hitsMetadata.hits()).thenReturn(List.of(hit));
+        when(searchResponse.hits()).thenReturn(hitsMetadata);
+
+        when(openSearchClient.search(
+                any(
+                        java.util.function.Function.class
+                ),
+                org.mockito.ArgumentMatchers.eq(JobDocument.class)
+        )).thenReturn(searchResponse);
+
+        // Act: Die echte Service-Methode aufrufen
+        List<JobSearchResponse> results =
+                jobMatchService.searchSimilarJobs(cvText);
+
+        // Assert: Das Ergebnis überprüfen
+        assertEquals(1, results.size());
+        assertEquals(
+                "Junior Java Backend Developer",
+                results.get(0).getJobTitle()
+        );
+        assertEquals(
+                "Java, Spring Boot, REST APIs und PostgreSQL",
+                results.get(0).getJobDescription()
+        );
+        assertEquals(
+                0.95,
+                results.get(0).getSimilarityScore(),
+                0.0001
+        );
+
+        verify(embeddingService).createEmbedding(cvText);
     }
 
 }
