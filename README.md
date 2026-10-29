@@ -59,7 +59,7 @@ OpenSearch stores and indexes job description embeddings. Its k-NN search can re
 
 The OpenSearch search score indicates the relevance of a result within the configured search. It is not automatically a calibrated percentage representing a candidate's suitability for a job.
 
-**Direct CV-to-job similarity scoring is still under development.**
+
 
 ### 3. Relational Data with PostgreSQL
 
