@@ -1,3 +1,4 @@
+
 <h1>AI Job Matching</h1>
 
 <h2>CV</h2>
@@ -6,4 +7,30 @@
 <h2>Job Description</h2>
 <textarea [(ngModel)]="jobDescription"></textarea>
 
-<button (click)="calculateMatch()">Calculate Match</button>
+<button (click)="calculateMatch()">
+  Matching berechnen
+</button>
+
+<h2>Matching-Ergebnisse</h2>
+
+
+<div
+  *ngFor="let job of results"
+  class="result-card"
+  [class.match-good]="getMatchStatus(job.similarityScore) === 'good'"
+  [class.match-poor]="getMatchStatus(job.similarityScore) === 'poor'"
+>
+
+
+  <p>
+    OpenSearch Score:
+    <strong>{{ job.similarityScore | number:'1.2-4' }}</strong>
+  </p>
+
+  <p
+    [class.match-message-good]="getMatchStatus(job.similarityScore) === 'good'"
+    [class.match-message-poor]="getMatchStatus(job.similarityScore) === 'poor'"
+  >
+    {{ getMatchMessage(job.similarityScore) }}
+  </p>
+</div>
