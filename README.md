@@ -103,10 +103,11 @@ mvn test
 - [x] OpenSearch embedding indexing
 - [x] Direct CV-to-job similarity scoring
 - [x] Frontend with Angular
-- [ ] Complete end-to-end matching workflow
+- [x] Complete end-to-end matching workflow
 - [ ] Matching and missing skills analysis
 - [ ] Expanded automated test coverage
 - [ ] Simplified local setup and documentation
+- [ ] Autehnification with OAuth2
 
 ## Author
 
