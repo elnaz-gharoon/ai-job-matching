@@ -17,8 +17,14 @@ public class JobMatch {
     private String jobDescription;
     private Double matchScore;
     private String recommendation;
+    private String jobTitle;
 
-    public JobMatch() {
+    public String getJobTitle() {
+        return jobTitle;
+    }
+
+    public void setJobTitle(String jobTitle) {
+        this.jobTitle = jobTitle;
     }
 
     public Long getId() {

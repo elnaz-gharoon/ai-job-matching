@@ -10,6 +10,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import static org.mockito.Mockito.when;
@@ -23,7 +26,7 @@ public class JobMatchControllerTest {
     private JobMatchController jobMatchController;
 
     @Test
-    void createJobMatch_shouldReturnJobMatchResponse() {
+    void createJobMatch_shouldReturnJobMatchResponse() throws IOException {
         JobMatchRequest request = new JobMatchRequest();
         request.setCvText("Java, Spring Boot, PostgreSQL");
         request.setJobDescription("Gesucht wird ein Java Backend Developer");

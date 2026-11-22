@@ -5,6 +5,15 @@ public class JobMatchRequest {
 
     private String cvText;
     private String jobDescription;
+    private String jobTitle;
+
+    public String getJobTitle() {
+        return jobTitle;
+    }
+
+    public void setJobTitle(String jobTitle) {
+      this.jobTitle = jobTitle;
+    }
 
     public String getCvText() {
         return cvText;

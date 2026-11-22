@@ -1,215 +1,114 @@
 # AI Job Matching Backend
 
-A backend application that analyzes a candidate's CV against a job description and calculates how well the candidate matches the position.
+A Java Spring Boot application for exploring AI-based semantic matching between a candidate's CV and job descriptions.
 
-The project combines a traditional Spring Boot backend with AI-based semantic matching to identify relevant skills, missing skills, and an overall match score.
+The project combines a REST API, relational data storage, locally generated text embeddings and OpenSearch vector search.
 
-## 🚀 Features
+## Features
 
-* CV and job description comparison
-* AI-based semantic similarity
-* Match score calculation
-* Identification of matching skills
-* Identification of missing skills
-* Job match recommendation
-* REST API
-* PostgreSQL persistence
-* Automated tests with JUnit and Mockito
-* Docker support
+- REST API built with Spring Boot
+- Relational data management with PostgreSQL and Spring Data JPA
+- Text embeddings generated locally using Ollama and `nomic-embed-text`
+- OpenSearch indexing and k-NN search for job description embeddings
+- Angular frontend for entering CVs and job descriptions
+- Automated tests with JUnit 5 and Mockito
 
-## 🛠️ Technologies
+**Project status:** The basic API and embedding integration are implemented. Direct CV-to-job similarity scoring and the complete matching workflow are still under development.
 
-* Java 21
-* Spring Boot
-* Spring Data JPA / Hibernate
-* PostgreSQL
-* Maven
-* REST API
-* JUnit 5
-* Mockito
-* Docker
-* Git
+## Tech Stack
 
-### AI
+- **Backend:** Java 21, Spring Boot, Maven
+- **Database:** PostgreSQL, Spring Data JPA, Hibernate
+- **AI embeddings:** Ollama, `nomic-embed-text`
+- **Vector search:** OpenSearch
+- **Frontend:** Angular, TypeScript, HTML, CSS
+- **Testing and tools:** JUnit 5, Mockito, Docker, Git
 
-The AI component is designed to use local embedding models instead of paid external APIs.
-
-Planned technology:
-
-* Ollama
-* Sentence Transformers / embedding models
-* Semantic similarity using vector embeddings
-
-## 🏗️ Architecture
+## Architecture
 
 ```text
-Client
-   │
-   ▼
-REST Controller
-   │
-   ▼
+Angular Frontend
+       |
+       v
+Spring Boot REST API
+       |
+       v
 Service Layer
-   │
-   ├──────────────► Repository ──────────► PostgreSQL
-   │
-   ▼
-AI Matching Service
-   │
-   ▼
-Embedding Service
-   │
-   ▼
-Local AI Model
+       |
+       +---- PostgreSQL
+       |     Relational data storage
+       |
+       +---- Ollama
+       |     Text-to-vector embeddings
+       |
+       +---- OpenSearch
+             Vector indexing and k-NN search
 ```
 
-The application follows a layered architecture:
+## How It Works
 
-```text
-controller
-service
-repository
-entity
-dto
-ai
-mapper
-exception
-```
+### 1. Text Embeddings with Ollama
 
-The AI integration is separated behind an abstraction so that the embedding provider can be replaced without changing the business logic.
+Ollama runs the `nomic-embed-text` model locally. The backend sends text to the Ollama API and receives a numerical embedding vector representing semantic characteristics of the text.
 
-## 📡 REST API
+Embeddings can be generated for CV text and job descriptions. Similarity calculations require a suitable comparison strategy for the resulting vectors.
 
-### Create Job Match
+### 2. Vector Search with OpenSearch
 
-```http
-POST /api/job-matches
-```
+OpenSearch stores and indexes job description embeddings. Its k-NN search can retrieve stored vectors that are similar to a query vector.
 
-Example request:
+The OpenSearch search score indicates the relevance of a result within the configured search. It is not automatically a calibrated percentage representing a candidate's suitability for a job.
 
-```json
-{
-  "cvText": "Java developer with experience in Spring Boot, PostgreSQL and Docker.",
-  "jobDescription": "We are looking for a Java developer with Spring Boot and database experience."
-}
-```
 
-Example response:
 
-```json
-{
-  "id": 1,
-  "matchScore": 85.5,
-  "recommendation": "Strong match"
-}
-```
+### 3. Relational Data with PostgreSQL
 
-### Get Job Match
+PostgreSQL provides relational data storage, accessed through Spring Data JPA and Hibernate. PostgreSQL and OpenSearch serve different purposes: relational persistence and vector-based retrieval, respectively.
 
-```http
-GET /api/job-matches/{id}
-```
+## Getting Started
 
-## 🗄️ Database
+### Prerequisites
 
-The application uses PostgreSQL.
+- Java 21
+- Maven
+- Node.js and npm for the Angular frontend
+- PostgreSQL
+- OpenSearch
+- Ollama with the `nomic-embed-text` model
 
-For local development, PostgreSQL runs in Docker:
+### Start the Backend
 
-```text
-Host: localhost
-Port: 5434
-Database: ai_job_matching
-Username: ai_user
-```
-
-The database is isolated from other local projects.
-
-## 🐳 Docker
-
-Start the PostgreSQL container:
-
-```bash
-docker start ai-job-matching-postgres
-```
-
-Stop it:
-
-```bash
-docker stop ai-job-matching-postgres
-```
-
-## ▶️ Run the Application
-
-Clone the repository:
-
-```bash
-git clone <repository-url>
-cd ai-job-matching
-```
-
-Start the application with Maven:
+Start and configure the required services, then run:
 
 ```bash
 mvn spring-boot:run
 ```
 
-The application runs on:
+Backend: `http://localhost:8080`
 
-```text
-http://localhost:8080
-```
+Frontend: `http://localhost:4200`
 
-## 🧪 Tests
-
-Run all tests:
+### Run Tests
 
 ```bash
 mvn test
 ```
 
-The project uses:
+**Configuration note:** Service addresses, ports, database credentials and model settings must match your local configuration. The backend and frontend must be started separately unless an automated setup is provided.
 
-* JUnit 5
-* Mockito
-* Spring Boot Test
+## Roadmap
 
-## 📋 Development Roadmap
+- [x] Spring Boot REST API
+- [x] Ollama embedding integration
+- [x] OpenSearch embedding indexing
+- [x] Direct CV-to-job similarity scoring
+- [x] Frontend with Angular
+- [x] Complete end-to-end matching workflow
+- [ ] Matching and missing skills analysis
+- [ ] Expanded automated test coverage
+- [ ] Simplified local setup and documentation
+- [ ] Autehnification with OAuth2
 
-* [x] Spring Boot project setup
-* [x] PostgreSQL configuration
-* [ ] JobMatch entity
-* [ ] Repository
-* [ ] DTOs
-* [ ] Service layer
-* [ ] REST Controller
-* [ ] Validation and exception handling
-* [ ] Skill extraction
-* [ ] AI embedding integration
-* [ ] Semantic similarity calculation
-* [ ] Automated tests
-* [ ] Swagger / OpenAPI
-* [ ] Docker Compose
-* [ ] GitHub documentation
-* [ ] Optional OpenSearch integration
+## Author
 
-## 🎯 Project Goal
-
-This project is designed as a portfolio project demonstrating practical backend development with Java and Spring Boot, including:
-
-* Clean architecture
-* REST API development
-* Database design
-* JPA/Hibernate
-* Testing
-* Docker
-* AI integration
-* Separation of concerns
-* SOLID principles
-
-## 👩‍💻 Author
-
-**Elnaz Gharoon**
-
-Java Backend Developer
+Elnaz Gharoon
