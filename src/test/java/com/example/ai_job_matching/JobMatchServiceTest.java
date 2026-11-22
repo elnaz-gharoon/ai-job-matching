@@ -117,6 +117,7 @@ public class JobMatchServiceTest {
         );
 
         verify(embeddingService).createEmbedding(cvText);
+        //
     }
 
 }
